@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 
 export default function App() {
@@ -10,10 +10,19 @@ export default function App() {
         </View>
       </SafeAreaView>
       <View style={{ alignItems: "center", height: 50, paddingTop: 5 }}>
-        <Text>Convert from:</Text>
+        <Text styles={{ fontSize: 48 }}>Convert from:</Text>
       </View>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <Text>From</Text>
+      </View>
+      <View style={{ alignItems: "center", height: 50 }}>
         <Text>Conver to:</Text>
+      </View>
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <Text>From:</Text>
+      </View>
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <Text style={{ fontSize: 30 }}>1 USD = ______ EUR</Text>
       </View>
     </>
   );
