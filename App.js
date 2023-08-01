@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { currOptions } from "./Options";
-import Picker from "@ouroboros/react-native-picker";
+import { SelectList } from "react-native-dropdown-select-list";
 
 export default function App() {
-  const [fromCur, setFromCur] = useState("USD");
-  const [toCur, setToCur] = useState("EUR");
+  const [fromCur, setFromCur] = useState("");
+  const [toCur, setToCur] = useState("");
 
   return (
     <>
@@ -22,34 +22,32 @@ export default function App() {
         }}
       >
         <Text style={{ fontSize: 24 }}>Convert from:</Text>
-        <Picker
-          onChanged={setFromCur}
-          options={currOptions}
-          style={{
-            borderWidth: 1,
-            borderColor: "#a7a7a7",
-            borderRadius: 5,
-            marginBottom: 5,
-            padding: 5,
-            width: 300,
-            textAlign: "center",
-          }}
-          value={fromCur}
+        <SelectList
+          setSelected={(val) => setFromCur(val)}
+          data={currOptions}
+          save="text"
+          defaultOption={{ key: "USD", value: "United States Dollars" }}
+          boxStyles={{ width: 300 }}
         />
         <Text style={{ fontSize: 24, marginTop: 20 }}>Convert to:</Text>
-        <Picker
-          onChanged={setToCur}
-          options={currOptions}
-          style={{
-            borderWidth: 1,
-            borderColor: "#a7a7a7",
-            borderRadius: 5,
-            marginBottom: 5,
-            padding: 5,
-            width: 300,
-          }}
-          value={toCur}
+        <SelectList
+          setSelected={(val) => setToCur(val)}
+          data={currOptions}
+          save="text"
+          defaultOption={{ key: "EUR", value: "Euros" }}
+          boxStyles={{ width: 300 }}
         />
+      </View>
+      <View
+        style={{
+          alignItems: "center",
+          paddingTop: 5,
+          flex: 1,
+        }}
+      >
+        <Text style={{ fontSize: 24 }}>
+          1 {fromCur} = ___ {toCur}
+        </Text>
       </View>
     </>
   );
