@@ -45,9 +45,11 @@ export default function App() {
           flex: 1,
         }}
       >
-        <Text style={{ fontSize: 24 }}>
-          1 {fromCur} = ___ {toCur}
-        </Text>
+        <View style={{ alignItems: "center" }}>
+          <Text style={{ fontSize: 36, paddingBottom: 5 }}>1 {fromCur}</Text>
+          <Text style={{ fontSize: 36, paddingBottom: 5 }}>=</Text>
+          <Text style={{ fontSize: 36, paddingBottom: 5 }}>___ {toCur}</Text>
+        </View>
       </View>
     </>
   );
