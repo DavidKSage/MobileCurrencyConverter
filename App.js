@@ -25,6 +25,7 @@ export default function App() {
             defaultOption={{ key: "USD", value: "United States Dollars" }}
             boxStyles={{ width: 300 }}
           />
+          <View style={{marginBottom: 35}}></View>
           <Text style={{ fontSize: 24, marginTop: 20 }}>Convert to:</Text>
           <SelectList
             setSelected={(val) => setToCur(val)}
@@ -40,7 +41,7 @@ export default function App() {
           flex: 1,
         }}
       >
-        <View style={{ alignItems: "center", flex: 2, justifyContent: "flex-end", marginBottom: "25%"}}>
+        <View style={{ alignItems: "center", flex: 2, marginBottom: "25%", marginTop: "30%"}}>
           <Text style={{ fontSize: 30}}>1 {fromCur}</Text>
           <Text style={{ fontSize: 30}}>=</Text>
           <Text style={{ fontSize: 30}}>___ {toCur}</Text>
