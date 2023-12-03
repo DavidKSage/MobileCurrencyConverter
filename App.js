@@ -1,12 +1,22 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import axios from "axios";
 import { currOptions } from "./Options";
 import { SelectList } from "react-native-dropdown-select-list";
 import Header from "./components/Header";
 
 export default function App() {
-  const [fromCur, setFromCur] = useState("");
-  const [toCur, setToCur] = useState("");
+  const [fromCur, setFromCur] = useState("USD");
+  const [toCur, setToCur] = useState("EUR");
+  const [rate, setRate] = useState();
+
+  useEffect(() => {
+    axios.get(`https://v6.exchangerate-api.com/v6/7775cc050e86656f28e93692/pair/${fromCur}/${toCur}`)
+   .then(res => setRate(res.data.conversion_rate))
+   .catch(err => {
+       alert("API is not responding", err.code);
+   })
+}, [fromCur, toCur]);
 
   return (
     <>
@@ -21,7 +31,7 @@ export default function App() {
           <SelectList
             setSelected={(val) => setFromCur(val)}
             data={currOptions}
-            save="text"
+            save="key"
             defaultOption={{ key: "USD", value: "United States Dollars" }}
             boxStyles={{ width: 300 }}
           />
@@ -30,7 +40,7 @@ export default function App() {
           <SelectList
             setSelected={(val) => setToCur(val)}
             data={currOptions}
-            save="text"
+            save="key"
             defaultOption={{ key: "EUR", value: "Euros" }}
             boxStyles={{ width: 300 }}
           />
@@ -44,7 +54,7 @@ export default function App() {
         <View style={{ alignItems: "center", flex: 2, marginBottom: "25%", marginTop: "30%"}}>
           <Text style={{ fontSize: 30}}>1 {fromCur}</Text>
           <Text style={{ fontSize: 30}}>=</Text>
-          <Text style={{ fontSize: 30}}>___ {toCur}</Text>
+          <Text style={{ fontSize: 30}}>{rate} {toCur}</Text>
         </View>
       </View>
     </>
